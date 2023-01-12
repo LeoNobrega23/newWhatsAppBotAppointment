@@ -1,9 +1,9 @@
 
-// Chaves que o usuário precisa digitar para iniciar
+// Keys message
 
 const keys = ["novoagendamento", "criaragendamento"];
 
-// Passo que o bot vai seguir
+// Bot steps
 
 const steps = {
   0: {
@@ -31,7 +31,7 @@ const steps = {
     }
   },
 
-// STEP em teste ainda.
+// Test.
 
   // 3: {
   //   replyMessage: "Ok, tudo certo!",
@@ -63,6 +63,7 @@ const steps = {
   // },
 
 };
+// Validate function
 
 function action(user, message) {
   const step = steps[user.currentStep];
