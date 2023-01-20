@@ -1,0 +1,5 @@
+setInterval(function(){ // Set interval
+    var date = new Date(); // Cria um dateObject para achar o horário
+    if(date.getHours() === 8 && date.getMinutes() === 0){ // verifica o tempo
+    }
+}, 60000); //repete a cada 1 min

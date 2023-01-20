@@ -1,7 +1,8 @@
 import qrcode from "qrcode-terminal";
 import { Client } from "whatsapp-web.js";
 
-import createAppointment from "./modules/create-appointment.mjs";
+import createAppointment from "./modules/new-appointment.mjs";
+import DateConvert from './utils/dateConvert.mjs'
 
 const users = []; //array of user
 
@@ -56,7 +57,17 @@ client.on("message", (message) => {
     user.currentFlow = createAppointment;
     user.currentStep = 0;
     user.currentFlow.action(user, message);
+  } else if(user.currentFlow === null) {
+    message.reply('Por favor, para iniciar digite "Novo agendamento"')
   }
+  // const schedules = [{
+  //   id:'',
+  //   userid:'',
+  //   description: message.body,
+  //   data: dateObject
+  
+  // }]
+
 });
 
 client.initialize();
