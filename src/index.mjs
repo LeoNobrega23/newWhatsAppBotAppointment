@@ -2,6 +2,7 @@ import qrcode from "qrcode-terminal";
 import { Client } from "whatsapp-web.js";
 
 import createAppointment from "./modules/new-appointment.mjs";
+import appointments from "./modules/new-appointment.mjs";
 import DateConvert from './utils/dateConvert.mjs'
 
 const users = []; //array of user
@@ -19,6 +20,15 @@ client.on("qr", (qr) => {
 // Test to start the bot
 client.on("ready", () => {
   console.log("Client is ready!");
+ 
+  setTimeout(()=>{
+    const remembeerts = appointments.filter((app)=> app.isSended === false && app.when === new Date.now())
+
+    for( rember in remembeerts){
+      remember.userId
+      rember.descrpiton
+    }
+  }, 60 * 100)
 });
   
 //reply message
@@ -60,14 +70,6 @@ client.on("message", (message) => {
   } else if(user.currentFlow === null) {
     message.reply('Por favor, para iniciar digite "Novo agendamento"')
   }
-  // const schedules = [{
-  //   id:'',
-  //   userid:'',
-  //   description: message.body,
-  //   data: dateObject
-  
-  // }]
-
 });
 
 client.initialize();

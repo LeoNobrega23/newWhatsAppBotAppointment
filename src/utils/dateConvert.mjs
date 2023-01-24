@@ -24,7 +24,8 @@ function dateConvert(stringdate) {
         return dateObject
 
     } catch (error) {
-        console.error('Date format invalid')        
+        console.error('Date format invalid')
+        throw new Error('Date format invalid')  
     }
 
 }

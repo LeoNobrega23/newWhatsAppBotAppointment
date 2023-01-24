@@ -1,67 +1,58 @@
-import { validate } from "node-cron";
+
 import dateConvert from "../utils/dateConvert.mjs";
 
 // Keys message     
 const keys = ["novoagendamento", "criaragendamento"];
 
+const appointments = []
+
 // Bot steps
 const steps = {
   0: {
-    replyMessage: "O que voce deseja ser lembrado?"
-    ,
+    replyMessage: "O que voce deseja ser lembrado?",
     replyErro: "",
     nextStep: 1,
-    validate: (message) => true,
+    validate: (message) => true
   },
   1: {
     replyMessage: "Por favor digite a data e hora. Exemplo: 23/01/2023 14:50",
     replyErro: "",
     nextStep: 2,
-    validate: (message) => true
+    validate: (message) => true,
+    action: (user, message) =>{
+      const description	= message.body
+      appointments.push({
+        userId: user.id,
+        description,
+        isSended: false,
+        isAppointted: false,
+        when: null
+      })
+    }  
   },
-
-// Test.
-
-    2: {
-      replyMessage: 'Ok, tudo certo!'
-      ,
-      replyErro:
-        false,
-      nextStep: null,
-      validate: (message) => {
-        try {
-          const body = message.body;
-          const date = body.split(" ")[0];
-          const time = body.split(" ")[1];
-          
-          
-          var dateParts = date.split("/");
-          var timeParts = time.split(":");
-          var dateObject = new Date(
-            //Ano
-            dateParts[2],
-            //Mês
-            dateParts[1] - 1,
-            //Dia
-            dateParts[0],
-            //Hora
-            timeParts[0],
-            // Minutos
-            timeParts[1]
-            );
-            
-            
-            
-            return dateObject;
-          } catch (error) {
-          return false;
-        }
-      },
-      action: (user, message) => {
-      },
-      
+  2: {
+    replyMessage: 'Ok, tudo certo!',
+    replyErro: 'Formato invalido, tente dessa forma exemplo: 23/01/2023 14:50',
+    nextStep: null,
+    validate: (message) => {
+      try {
+       const date = dateConvert(message.body)
+       return date > new Date.now()
+      } catch (error) {
+        return false
+      }
     },
+    action: (user, message)=> {
+      const date = dateConvert(message.body)
+     const app =  appointments.findIndex((app)=> app.isSended === false && when === null && app.userId === user.id)
 
+     if(app === -1)
+      console.error('appointment not found')
+
+      app[index].when = date;
+      app[index].isAppointted = true
+    }
+  },
 };
 
 // Validate function
@@ -69,30 +60,29 @@ const steps = {
 function action(user, message) {
   const step = steps[user.currentStep];
   const validate = step.validate(message);
-    console.log(user.currentStep)
+ 
     if (validate) {
       user.currentStep = step.nextStep;
       message.reply(step.replyMessage);
       
       if (step.action) {
-        
         step.action(user, message);
       }
       
-  } else  {
+  } else {
     message.reply(step.replyErro);
   } 
 }
-const schedules = [{
-  uId: '',
-  userid:'',
-  description: (message) => {
-    console.log(message.boy)
-  },
-  data: (dateObject) => {
-  },
+// const schedules = [{
+//   uId: '',
+//   userid:'',
+//   description: (message) => {
+//     console.log(message.boy)
+//   },
+//   data: (dateObject) => {
+//   },
   
-}]
+// }]
 
 
 
@@ -100,5 +90,6 @@ export default {
   keys,
   action,
   steps,
-  schedules,
+  appointments
+  // schedules,
 };

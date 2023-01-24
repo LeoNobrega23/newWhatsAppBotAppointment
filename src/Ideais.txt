@@ -1,5 +1,7 @@
 setInterval(function(){ // Set interval
     var date = new Date(); // Cria um dateObject para achar o horário
-    if(date.getHours() === 8 && date.getMinutes() === 0){ // verifica o tempo
+    if(date.getHours() === timeParts[0] && date.getMinutes() === timeParts[1]){ // verifica o tempo
     }
-}, 60000); //repete a cada 1 min
+
+    if(date.getDay() === dateParts [2] && date.getMounth === dateParts[1]-1)
+}, 120000); //repete a cada 2 min
