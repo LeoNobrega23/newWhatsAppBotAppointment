@@ -20,15 +20,19 @@ client.on("qr", (qr) => {
 // Test to start the bot
 client.on("ready", () => {
   console.log("Client is ready!");
+  
  
-  setTimeout(()=>{
-    const remembeerts = appointments.filter((app)=> app.isSended === false && app.when === new Date.now())
+  // setTimeout(()=>{
+  //   const remembeerts = appointments.filter((app)=> app.isSended === false && app.when === new Date.now())
+  //   console.log(appointments)
 
-    for( rember in remembeerts){
-      remember.userId
-      rember.descrpiton
-    }
-  }, 60 * 100)
+
+    
+  //   for( remember in remembeerts){
+  //     remember.userId
+  //     remember.descrpiton
+  //   }
+  // }, 60 * 100)
 });
   
 //reply message

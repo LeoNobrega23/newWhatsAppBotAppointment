@@ -31,8 +31,8 @@ const steps = {
     }  
   },
   2: {
-    replyMessage: 'Ok, tudo certo!',
-    replyErro: 'Formato invalido, tente dessa forma exemplo: 23/01/2023 14:50',
+    replyMessage: 'Ok, está marcado!',
+    replyErro: 'Por favor, digite um formato válido ex: 14/02/2023 14:50',
     nextStep: null,
     validate: (message) => {
       try {
@@ -44,7 +44,7 @@ const steps = {
     },
     action: (user, message)=> {
       const date = dateConvert(message.body)
-     const app =  appointments.findIndex((app)=> app.isSended === false && when === null && app.userId === user.id)
+      const app =  appointments.findIndex((app)=> app.isSended === false && when === null && app.userId === user.id)
 
      if(app === -1)
       console.error('appointment not found')

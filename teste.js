@@ -22,6 +22,6 @@ array.push({
     idade: 43,
     telefone:321321
 })
-for(const obj  of array.filter(i=> i.idade > 30)){
+for(const obj  of array.filter(i=> i.idade >= 30)){
     console.log(obj.nome)
 }
